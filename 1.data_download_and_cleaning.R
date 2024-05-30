@@ -9,8 +9,8 @@ temp <- tempfile()
 download.file(url=download_url, destfile=temp,quiet=FALSE)
 alldata <- read.table(unzip(temp, "occurrence.txt"),sep="\t",header=T, fileEncoding = "UTF-8")
 
-# write_rds(alldata, "alldata.rds")
-# alldata <- read_rds("alldata.rds")
+write_rds(alldata, "alldata.rds")
+alldata <- read_rds("alldata.rds")
 
 # How many variables are empty, i.e. NA?
 alldata_sum <- alldata %>% 
@@ -61,11 +61,11 @@ alldata <- alldata %>%
   dplyr::select(-samplingProtocol)
 
 # Keep records of the same quantity
-alldata <- alldata %>% 
-  filter(organismQuantity == "1/1") %>% 
-  dplyr::select(-organismQuantity)
+#alldata <- alldata %>% 
+#  filter(organismQuantity == "1/1") %>% 
+#  dplyr::select(-organismQuantity)
 
-# And then we do not need this
+# We do not need this
 alldata <- alldata %>% 
   dplyr::select(-organismQuantityType)
 
